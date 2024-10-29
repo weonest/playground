@@ -1,4 +1,4 @@
-from core.db.postgres import AsyncPostgres
+from infrastructure.datasource.postgres import AsyncPostgres
 
 
 async def get_async_db_session():

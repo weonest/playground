@@ -4,7 +4,7 @@ from typing import Optional, AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker, create_async_engine, AsyncSession
 
-from core.db.exception import DatabaseInitializeError
+from infrastructure.datasource.exception import DatabaseInitializeError
 from support.common.singleton import Singleton, initialize_once
 
 
