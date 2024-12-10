@@ -34,7 +34,6 @@ class PageDTO(BaseDTO, Generic[T]):
 class ResponseDTO(CamelDTO, Generic[T]):
     status_code: int = 200
     data: T | list[T]
-    error: Optional[dict] = None
 
     @staticmethod
     def ok():

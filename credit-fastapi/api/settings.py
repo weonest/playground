@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    local = False
+    local: bool = False
 
     # db settings
     db_host: str = "localhost"
