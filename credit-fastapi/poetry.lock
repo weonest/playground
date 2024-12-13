@@ -107,6 +107,22 @@ all = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>
 standard = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=2.11.2)", "python-multipart (>=0.0.7)", "uvicorn[standard] (>=0.12.0)"]
 
 [[package]]
+name = "fastapi-events"
+version = "0.12.1"
+description = "Event dispatching library for FastAPI"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "fastapi-events-0.12.1.tar.gz", hash = "sha256:2294cc1a02631bb3d1746ec7c66903ab58cec62f9b5180d6e3efc89e9c4448fb"},
+    {file = "fastapi_events-0.12.1-py3-none-any.whl", hash = "sha256:29a1c226ced48dd2fa2c1ac9b21141f5933010d39b6c20e1bd7eb645873a5942"},
+]
+
+[package.extras]
+aws = ["boto3 (>=1.14)"]
+google = ["google-cloud-pubsub (>=2.13.6)"]
+otel = ["opentelemetry-api (>=1.12.0,<2.0)"]
+
+[[package]]
 name = "greenlet"
 version = "3.1.1"
 description = "Lightweight in-process concurrent programming"
@@ -914,4 +930,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "9e2a1915ab630db44cbad2d292258aa11a4b62f632733aa61e4625b6892e8c4f"
+content-hash = "5784ee15d59365a2b2f3929282f919d59afb4b9694bbf6e836e90997fb8a5261"

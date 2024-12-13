@@ -14,7 +14,7 @@ class CamelDTO(BaseModel):
     )
 
 
-class BaseDTO(BaseModel):
+class RootModel(BaseModel):
     model_config = ConfigDict(
         from_attributes=True,
         use_enum_values=True,
@@ -23,7 +23,7 @@ class BaseDTO(BaseModel):
     )
 
 
-class PageDTO(BaseDTO, Generic[T]):
+class PageDTO(RootModel, Generic[T]):
     data: T | list[T]
     page: int
     page_size: int

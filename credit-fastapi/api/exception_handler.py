@@ -42,3 +42,17 @@ def add_exception_handler(app: FastAPI):
             """
         )
         return create_error_response(exc.type, exc.code, exc.message)
+
+    @app.exception_handler(Exception)
+    async def handler_exception(request, exc: Exception):
+        logging.error(
+            f"""
+            method : {request.method}
+            url : {request.url}
+            pathParams : {request.path_params}
+            queryParams : {request.query_params}
+            header : {{key: value for key, value in request.headers.items()}}
+            message : {exc}
+            """
+        )
+        return create_error_response("ISE", "500", "Internal Server Error")

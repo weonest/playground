@@ -3,6 +3,8 @@ import timeit
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
+from fastapi_events.handlers.local import local_handler
+from fastapi_events.middleware import EventHandlerASGIMiddleware
 
 from api import main_router
 from api.exception_handler import add_exception_handler
@@ -49,6 +51,7 @@ class Application:
             debug=self.settings.local,
         )
         self.app.include_router(main_router)
+        self.app.add_middleware(EventHandlerASGIMiddleware, handlers=[local_handler])
         add_exception_handler(self.app)
 
         @self.app.middleware("http")

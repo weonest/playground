@@ -1,5 +1,5 @@
-from support.common.base_dto import BaseDTO
+from support.common.base_dto import RootModel
 
 
-class CreditCreateCommand(BaseDTO):
+class CreditCreateCommand(RootModel):
     amount: int
