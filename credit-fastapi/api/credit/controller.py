@@ -14,5 +14,6 @@ async def create_credit(
         request_body: CreateCreditRequest,
         db_session: AsyncSession = Depends(get_async_db_session),
 ) -> ResponseDTO:
+    await db_session.execute("SELECT 1")
     await credit_service.create(db_session, request_body.to_command())
     return ResponseDTO.ok()
