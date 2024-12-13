@@ -1,0 +1,1 @@
+from infrastructure.persistence.credit.entity.credit_entity import CreditEntity

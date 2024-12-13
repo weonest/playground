@@ -1,4 +1,4 @@
-from typing import Optional, Generic, TypeVar
+from typing import Generic, TypeVar
 
 from pydantic import BaseModel, ConfigDict
 from pydantic.alias_generators import to_camel

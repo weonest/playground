@@ -1,6 +1,9 @@
-from support.common.base import CamelDTO
+from business.credit.dto import CreditCreateCommand
+from support.common.base_dto import CamelDTO
 
 
-class ChargeCreditRequest(CamelDTO):
-    credit_id: str
+class CreateCreditRequest(CamelDTO):
     amount: int
+
+    def to_command(self) -> CreditCreateCommand:
+        return CreditCreateCommand(amount=self.amount)

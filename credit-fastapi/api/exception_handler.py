@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from pydantic import Field
 from fastapi.responses import JSONResponse
 
-from support.common.base import CamelDTO
+from support.common.base_dto import CamelDTO
 from support.common.exception import CustomException
 
 
