@@ -1,0 +1,55 @@
+name: test-ci
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main", "dev"]
+    paths:
+      - "**"
+env:
+  DEVELOP_IMAGE_TAG: dev-credit-${{ github.run_number }}
+  PROD_IMAGE_TAG: prod-credit
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  build:
+    name: 빌드
+    runs-on: ubuntu-latest
+    outputs:
+      IMAGE_TAG: ${{ steps.get_version.outputs.IMAGE_TAG }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get version from pyproject.toml
+        id: get_version
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            echo "IMAGE_TAG=${{ env.DEVELOP_IMAGE_TAG }}" >> $GITHUB_ENV
+          else
+            VERSION=$(grep -m 1 'version =' pyproject.toml | awk -F ' = ' '{print $2}' | tr -d '"')
+            IMAGE_TAG="${{ env.PROD_IMAGE_TAG }}-${VERSION}"
+            echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+            echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+          fi
+  print:
+    name: print-output
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get version
+        id: get_version
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            echo "IMAGE_TAG=${{ env.DEVELOP_IMAGE_TAG }}" >> $GITHUB_ENV
+            echo "STAGE=DEV" >> $GITHUB_ENV
+            echo "LOWER_STAGE=dev" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=${{ needs.build.outputs.IMAGE_TAG }}" >> $GITHUB_ENV
+            echo "STAGE=PROD" >> $GITHUB_ENV
+            echo "LOWER_STAGE=prod" >> $GITHUB_ENV
+            echo "IMAGE_TAG=${{ needs.build.outputs.IMAGE_TAG }}"
+          fi
