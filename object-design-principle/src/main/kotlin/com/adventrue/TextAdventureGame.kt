@@ -35,6 +35,7 @@ class TextAdventureGame(
                     ?: throw IllegalArgumentException("이해할 수 없는 명령어입니다.")
 
                 val result = commandObj.execute(argument)
+//                val result = commandObj.execute(this) 이런 방식으로 가야 할까?
 
                 if (result == -1) {
                     isRunning = false

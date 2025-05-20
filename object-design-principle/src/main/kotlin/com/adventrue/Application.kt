@@ -14,7 +14,7 @@ fun main() {
     TextAdventureGame(
         x = 0, y = 0, width = 2, height = 3,
         rooms = listOf(
-            Pond(), null, Hill(), Castle(), Hill(), Cave()
+            Pond(), null, Hill(), Castle(), Hill(), Cave(),
         ),
         commands = listOf(
             GoCommand(),

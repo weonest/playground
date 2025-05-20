@@ -1,6 +1,5 @@
 package com.adventrue.command
 
-import com.adventrue.TextAdventureGame
 import com.adventrue.exception.InvalidCommandException
 
 class GoCommand : Command {
@@ -26,6 +25,13 @@ class GoCommand : Command {
         }
         val direction = Direction.from(argument)
             ?: throw InvalidCommandException("go 명령어는 north, south, east, west 중 하나의 방향을 지정해야 합니다.")
+
+        return when (direction) {
+            Direction.NORTH -> 0
+            Direction.SOUTH -> 1
+            Direction.EAST -> 2
+            Direction.WEST -> 3
+        }
 
         return 1
     }
