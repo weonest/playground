@@ -1,38 +1,28 @@
 package com.adventrue.command
 
-import com.adventrue.exception.InvalidCommandException
+import com.adventrue.common.MessageWriter
+import com.adventrue.game.Direction
 
-class GoCommand : Command {
-    enum class Direction(val value: String) {
-        NORTH("north"),
-        SOUTH("south"),
-        EAST("east"),
-        WEST("west");
+class GoCommand(
+    private val messageWriter: MessageWriter = MessageWriter(),
+    private var direction: Direction = Direction.INIT
+) : Command {
 
-        companion object {
-            fun from(value: String): Direction? {
-                return entries.find { it.value == value }
-            }
-        }
+    override val name: String = "go"
+
+    fun setDirection(direction: Direction) {
+        this.direction = direction
     }
 
-    override val name: String
-        get() = "go"
+    override fun execute(commandContext: CommandContext) {
+        val player = commandContext.player ?: throw IllegalStateException("Player not found in command context")
 
-    override fun execute(argument: String?): Int {
-        if (argument == null) {
-            throw InvalidCommandException("go 명령어는 방향을 지정해야 합니다.")
-        }
-        val direction = Direction.from(argument)
-            ?: throw InvalidCommandException("go 명령어는 north, south, east, west 중 하나의 방향을 지정해야 합니다.")
-
-        return when (direction) {
-            Direction.NORTH -> 0
-            Direction.SOUTH -> 1
-            Direction.EAST -> 2
-            Direction.WEST -> 3
+        if (player.canMove(direction)) {
+            player.move(direction)
+            messageWriter.printRoomMessage(player.getCurrentRoom())
+            return
         }
 
-        return 1
+        messageWriter.printBlockedMessage()
     }
 }
