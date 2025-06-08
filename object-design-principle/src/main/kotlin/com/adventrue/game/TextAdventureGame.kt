@@ -48,6 +48,7 @@ class TextAdventureGame(
         }
     }
 
+    // 이게 아닌데..
     private fun createCommandContext(command: Command): CommandContext {
         return when (command) {
             is GoCommand -> CommandContext(player = player)

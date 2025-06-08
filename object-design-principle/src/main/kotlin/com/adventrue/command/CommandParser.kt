@@ -12,13 +12,13 @@ class CommandParser(private val commands: List<Command>) {
             ?: throw InvalidCommandException("존재하지 않는 커맨드입니다 : ${split(input)[0]}")
 
         if (command is GoCommand) {
-           preProcessGoCommand(command, userCommand)
+           processGoArgument(command, userCommand)
         }
 
         return command
     }
 
-    private fun preProcessGoCommand(command: Command, userCommand: List<String>) {
+    private fun processGoArgument(command: Command, userCommand: List<String>) {
         if (command is GoCommand) {
             if (userCommand.size < 2) {
                 throw InvalidCommandException("방향을 지정하지 않았습니다. 사용법: go [방향]")
