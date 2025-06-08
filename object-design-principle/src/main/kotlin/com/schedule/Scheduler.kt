@@ -34,7 +34,7 @@ class Scheduler(
 
     private fun validateOverlap(
         recurrenceMeeting: RecurringMeeting,
-        meetings: List<RecurringMeeting>
+        meetings: Set<RecurringMeeting>
     ) {
         for (meeting in meetings) {
             meeting.validateOverlap(recurrenceMeeting)
