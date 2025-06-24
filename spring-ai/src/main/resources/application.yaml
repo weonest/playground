@@ -1,0 +1,6 @@
+spring.application.name=spring-ai
+
+spring:
+  ai:
+    oepnai:
+      api-key: ${OPENAI_API_KEY:}
