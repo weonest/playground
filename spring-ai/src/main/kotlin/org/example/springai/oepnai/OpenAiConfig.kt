@@ -16,7 +16,7 @@ class OpenAiConfig(
     fun openAiChatModel(): OpenAiChatModel {
         val key = ApiKey { apiKey }
         val openAiApi = OpenAiApi.builder().apiKey(key).build()
-        val openAiOptions = OpenAiChatOptions.builder().model("gpt-4o").build()
+        val openAiOptions = OpenAiChatOptions.builder().model(OpenAiApi.ChatModel.GPT_4_O.value).build()
         return OpenAiChatModel.builder()
             .openAiApi(openAiApi)
             .defaultOptions(openAiOptions)
