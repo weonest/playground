@@ -1,6 +1,7 @@
-spring.application.name=spring-ai
-
 spring:
   ai:
-    oepnai:
+    openai:
       api-key: ${OPENAI_API_KEY:}
+  config:
+    import:
+        - optional:file:src/main/resources/.env[.properties]
