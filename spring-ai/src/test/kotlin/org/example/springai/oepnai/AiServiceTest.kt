@@ -1,6 +1,7 @@
 package org.example.springai.oepnai
 
 import org.junit.jupiter.api.Assertions.*
+import org.springframework.ai.converter.BeanOutputConverter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import kotlin.test.Test
@@ -19,6 +20,13 @@ class AiServiceTest {
 
         // Then
         // Assertions can be added here based on the expected behavior of the chat method
+    }
+
+    @Test
+    fun `포맷 출력 테스트`() {
+        val converter = BeanOutputConverter(AiResponse::class.java)
+
+        println(converter.format)
     }
 
 }
