@@ -5,3 +5,8 @@ spring:
   config:
     import:
         - optional:file:src/main/resources/.env[.properties]
+
+prompt:
+  fashion:
+    system-message: ${FASHION_SYSTEM_MESSAGE:}
+    user-message: ${FASHION_USER_MESSAGE:}
