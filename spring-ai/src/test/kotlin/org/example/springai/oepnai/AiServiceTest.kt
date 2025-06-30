@@ -41,5 +41,4 @@ class AiServiceTest {
         val converter2 = BeanOutputConverter(object : ParameterizedTypeReference<List<ApiResponse<FabricResponse>>>() {})
         println(converter2.format)
     }
-
 }
