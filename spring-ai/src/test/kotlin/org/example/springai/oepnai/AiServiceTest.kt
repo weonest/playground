@@ -4,7 +4,6 @@ import org.springframework.ai.converter.BeanOutputConverter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.core.ParameterizedTypeReference
-import java.util.List
 import java.util.concurrent.Executors
 import kotlin.test.Test
 
@@ -19,14 +18,14 @@ class AiServiceTest {
 
     @Test
     fun `챗 테스트`() {
-//        aiService.chat()
+        aiService.chat()
         fashionService.chat()
     }
 
     @Test
     fun `챗 비동기 테스트`() {
         Executors.newVirtualThreadPerTaskExecutor().use { executor ->
-            val futures = (1..10).map { i ->
+            (1..10).map { i ->
                 executor.submit {
                     println("실행 $i")
                     fashionService.chat()
@@ -37,8 +36,7 @@ class AiServiceTest {
 
     @Test
     fun `포맷 출력 테스트`() {
-        val converter = BeanOutputConverter(AiResponse::class.java)
-        val converter2 = BeanOutputConverter(object : ParameterizedTypeReference<List<ApiResponse<FabricResponse>>>() {})
-        println(converter2.format)
+        val converter = BeanOutputConverter(object : ParameterizedTypeReference<List<ApiResponse<FabricResponse>>>() {})
+        println("Converter format: ${converter.format}")
     }
 }

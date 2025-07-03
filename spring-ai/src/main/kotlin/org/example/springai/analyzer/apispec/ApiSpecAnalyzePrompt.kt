@@ -1,4 +1,4 @@
-package org.example.springai.analyzer.prompt
+package org.example.springai.analyzer.apispec
 
 data class ApiSpecAnalyzePrompt(
     val systemPrompt: SystemPrompt,
@@ -24,7 +24,9 @@ data class ApiSpecAnalyzePrompt(
             
             
             # 입력 형식(Input Format)
-            {inputFormat}
+            httpMethod: HTTP 메서드
+            requestUrl: 요청 URL
+            spec: API 스펙 문서
             
             # 유의 사항(Cautions)
             제공된 문서에서 requestUrl과 httpMethod에 매칭되는 API 스펙에서 summary를 찾은 값으로 반환하고, 찾지 못할 경우에는 공백으로 제공합니다.
@@ -32,10 +34,10 @@ data class ApiSpecAnalyzePrompt(
             
             # 출력 형식(Output Format)
             {outputFormat}
-        """
+        """,
     )
 
     data class UserPrompt(
-        val question: String,
+        val message: String,
     )
 }
