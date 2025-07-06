@@ -44,17 +44,17 @@ class StackTraceAnalyzer {
         method: MethodNode
     ): MethodSignatureInfo {
         val argumentTypes = Type.getArgumentTypes(method.desc)
-        val localVariables = method.localVariables ?: listOf()
-        // 인스턴스 메서드면 첫 번째(this) 변수는 제외
-        val isStatic = (method.access and org.objectweb.asm.Opcodes.ACC_STATIC) != 0
-        val parameterNames = localVariables
-            .drop(if (isStatic) 0 else 1)
+
+        val parameterNames = method.localVariables
+            .asSequence()
+            .drop(1)
             .take(argumentTypes.size)
             .map { it.name }
+            .toList()
 
         val parameters = argumentTypes.mapIndexed { index, type ->
             MethodSignatureInfo.ParameterInfo(
-                name = parameterNames.getOrElse(index) { "arg$index" },
+                name = parameterNames.getOrElse(index) { "arg$index" }, // 파라미터 이름이 없는 경우 대비
                 type = type.className
             )
         }

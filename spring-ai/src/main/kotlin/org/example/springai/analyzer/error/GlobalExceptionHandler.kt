@@ -7,7 +7,6 @@ import java.lang.Exception
 
 @RestControllerAdvice
 class GlobalExceptionHandler(
-    private val slackClient: SlackClient,
     private val errorAnalyzer: LlmErrorAnalyzer,
 ) {
 
@@ -20,7 +19,5 @@ class GlobalExceptionHandler(
                 exception = exception,
             )
         )
-        // 로깅 로직..
-        slackClient.sendErrorNotification()
     }
 }

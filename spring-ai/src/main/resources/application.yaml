@@ -10,3 +10,8 @@ prompt:
   fashion:
     system-message: ${FASHION_SYSTEM_MESSAGE:}
     user-message: ${FASHION_USER_MESSAGE:}
+
+
+slack:
+  webhook:
+    url: ${SLACK_WEBHOOK_URL:}

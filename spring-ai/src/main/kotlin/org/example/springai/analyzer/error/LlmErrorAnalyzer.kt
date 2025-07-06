@@ -9,6 +9,7 @@ class LlmErrorAnalyzer(
     private val promptFactory: PromptFactory,
     private val openAiChatModel: OpenAiChatModel,
     private val stackTraceAnalyzer: StackTraceAnalyzer,
+    private val slackClient: SlackClient,
 ) {
     fun analyzeFromMessage(
         request: ErrorAnalyzeRequest.FromMessage,
@@ -19,9 +20,9 @@ class LlmErrorAnalyzer(
             cause = request.message,
         )
 
-        analyzeWithInput(input)?.let { return it }
-            ?: throw RuntimeException("응답 생성 실패")
-
+        val output = analyzeWithInput(input) ?: throw RuntimeException("응답 생성 실패")
+        slackClient.sendErrorNotification(output)
+        return output
     }
 
     fun analyzeFromException(
@@ -37,8 +38,9 @@ class LlmErrorAnalyzer(
             cause = errorLog.stackTrace
         )
 
-        analyzeWithInput(input)?.let { return it }
-            ?: throw RuntimeException("응답 생성 실패")
+        val output = analyzeWithInput(input) ?: throw RuntimeException("응답 생성 실패")
+        slackClient.sendErrorNotification(output)
+        return output
     }
 
     private fun analyzeWithInput(input: IoFormat.Input): IoFormat.Output? {
