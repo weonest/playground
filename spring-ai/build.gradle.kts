@@ -29,6 +29,9 @@ dependencyManagement {
 dependencies {
 	implementation(platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT"))
 	implementation("org.springframework.ai:spring-ai-openai")
+	// MethodSignature 분석을 위한 ASM
+	implementation("org.ow2.asm:asm:9.6")
+	implementation("org.ow2.asm:asm-tree:9.6")
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
