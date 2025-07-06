@@ -11,7 +11,7 @@ class ApiAnalyzeController(
     @GetMapping("/api/v0/analyze")
     fun analyze(
         @RequestBody request: ApiAnalyzeRequest
-    ): String {
-        return apiSpecAnalyzer.analyze(request)
+    ) {
+        apiSpecAnalyzer.analyze(request)
     }
 }

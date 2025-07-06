@@ -17,7 +17,7 @@ class ApiSpecAnalyzer(
 ) {
     fun analyze(
         request: ApiAnalyzeRequest,
-    ) {
+    ): IoFormat.Output? {
         val apiSpecResponse = externalApiLoader.load(request.apiSpecUrl)
 
         val outputConverter = BeanOutputConverter(object : ParameterizedTypeReference<IoFormat.Output>() {})
@@ -40,8 +40,11 @@ class ApiSpecAnalyzer(
         ).build()
 
         val prompt = Prompt(listOf(systemMessage, userMessage))
-        val response = openAiChatModel.call(prompt)
 
-        print("Response: ${response}")
+        val response = openAiChatModel.call(prompt)
+        if (response.result == null) {
+            throw RuntimeException("Response result is null")
+        }
+        return outputConverter.convert(response.result.output!!.text!!)
     }
 }
