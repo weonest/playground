@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: mysql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${DB_HOST:localhost:3306}/${DB_NAME:local}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
@@ -7,3 +10,20 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+---
+spring:
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+server:
+  tomcat:
+    threads:
+      max: 1

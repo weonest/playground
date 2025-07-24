@@ -1,8 +1,5 @@
 package org.example.springai.analyzer.error
 
-import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValues
 import org.example.springai.analyzer.apispec.IoFormat
 import org.springframework.ai.converter.BeanOutputConverter
 import org.springframework.beans.factory.annotation.Autowired
